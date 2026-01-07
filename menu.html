@@ -1,0 +1,1112 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Finca Las Ahijaderas</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: #f9f9f9;
+            color: #333;
+        }
+        /* NAVBAR */
+        nav {
+            background: #1f3323;
+            padding: 28px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-logo {
+            flex: 0 0 auto;
+        }
+
+        .logo {
+            height: 5cm;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 90px; /* antes 250px — esto rompe textos en Safari */
+            flex-wrap: nowrap;
+            white-space: nowrap; /* evita que safari mueva el texto */
+        }
+        .nav-links a {
+            white-space: nowrap; /* no cortar los títulos del menú */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.8em;
+            font-family: "DM Serif Display", serif;
+            font-weight: 400;
+            transition: color 0.3s;
+            margin: 0 10px;
+        }
+
+            nav a:hover {
+                color: #a3b18a;
+            }
+        /* SECCIONES */
+        section {
+            padding: 60px 20px;
+        }
+
+            section h2 {
+                text-align: center;
+                font-size: 2.7em;
+                color: #2e3a2b;
+                margin-bottom: 40px;
+                font-family: "DM Serif Display", serif;
+            }
+        /* GRID CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            }
+
+            .card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .card h3 {
+                margin: 15px 0 10px 0;
+                color: #2e3a2b;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 400;
+                font-size: 1.2em;
+            }
+        /* Contenedor de iconos en las cards */
+        .allergens {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
+            /* Tamaño de iconos en las cards */
+            .allergens .allergen-icon {
+                width: 10px;
+                height: 22px;
+                object-fit: contain;
+                filter: drop-shadow(0 0 1px rgba(0,0,0,0.15));
+            }
+        /* Iconos dentro del modal */
+        #modal-allergens {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 12px;
+        }
+
+            #modal-allergens .allergen-icon {
+                width: 28px;
+                height: 28px;
+            }
+        /* Sección informativa de alérgenos */
+        .allergen-info {
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 60px;
+        }
+
+            .allergen-info h2 {
+                font-family: "DM Serif Display", serif;
+                font-size: 2em;
+                color: #2e3a2b;
+                margin-bottom: 18px;
+            }
+
+        .allergen-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+            .allergen-icons img {
+                width: 80px;
+                height: 80px;
+                object-fit: contain;
+                opacity: 0.9;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+                .allergen-icons img:hover {
+                    transform: scale(1.15);
+                    opacity: 1;
+                }
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(6px);
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 50%;
+            width: 95%;
+            max-height: 100%;
+            text-align: center;
+            overflow: auto;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+            .modal-content img {
+                width: auto;
+                max-width: 100%;
+                height: auto;
+                max-height: 400px;
+                margin-bottom: 15px;
+            }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            position: relative;
+        }
+
+        .modal-prev, .modal-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-prev {
+            left: 10px;
+        }
+
+        .modal-next {
+            right: 10px;
+        }
+
+            .modal-prev img, .modal-next img {
+                width: 80px;
+                height: auto;
+                transition: transform 0.2s;
+            }
+
+                .modal-prev img:hover, .modal-next img:hover {
+                    transform: scale(1.2);
+                }
+
+        #modal-title {
+            font-size: 1.9em;
+            font-weight: 300;
+            margin-top: 15px;
+            color: #2e3a2b;
+            font-family: 'Pinyon Script', serif;
+            text-align: center;
+        }
+        /* FOOTER */
+        .footer {
+            background-color: #1f3323;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-family: "DM Serif Display", serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            max-width: 900px;
+            gap: 40px;
+        }
+
+        .footer-left, .footer-right {
+            width: 45%;
+        }
+
+        .footer-divider {
+            width: 2px;
+            background-color: white;
+            height: 80px;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-divider {
+                display: none;
+            }
+
+            .footer-left, .footer-right {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                position: static;
+                transform: none;
+            }
+            .logo {
+                height: 3.5cm;
+            }
+            .card img {
+                height: 160px;
+            }
+        }
+
+        .language-buttons {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+            .language-buttons button {
+                background: none;
+                color: #fff;
+                border: none;
+                padding: 6px 12px;
+                font-size: 1.3em;
+                cursor: pointer;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                transition: background 0.3s;
+            }
+
+                .language-buttons button:hover {
+                    background: #fff;
+                    color: #a3b18a;
+                }
+
+            .language-buttons .flag {
+                width: 20px;
+                height: auto;
+                display: inline-block;
+            }
+            @supports (-webkit-touch-callout: none) {
+                nav {
+                    padding: 24px 30px;
+                }
+                .nav-links {
+                    gap: 50px; /* móvil */
+                }
+            }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">
+            <img src="logo.png" class="logo" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#appetizers">APPETIZERS</a>
+            <a href="#starters">STARTER</a>
+            <a href="#main">MAIN COURSE</a>
+            <a href="#dessert">DESSERT</a>
+        </div>
+        <div class="language-buttons">
+            <button onclick="setLanguage('es')">
+                <img src="es.png" alt="ES" class="flag"> ES
+            </button>
+            <button onclick="setLanguage('en')">
+                <img src="uk.png" alt="EN" class="flag"> EN
+            </button>
+        </div>
+    </nav>
+    <!-- APPETIZERS -->
+    <section id="appetizers">
+        <h2>APPETIZERS</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('muslitos.jpg', 0,'appetizers')">
+                <img src="muslitos.jpg" alt='Quail drumsticks in "Villaroy Style"'>
+                <h3>Quail drumsticks in "Villaroy Style"</h3>
+                <div class="allergens">
+                    <img src="gluten.png" class="allergen-icon"
+                         alt="gluten">
+                    <img src="huevo.png" class="allergen-icon" alt="egg">
+                </div>
+            </div>
+            <div class="card" onclick="openModal('brochetas.jpg', 1,'appetizers')">
+                <img src="brochetas.jpg" alt="Green puffed rice-crusted prawn skewers">
+                <h3>Green puffed rice-crusted prawn skewers</h3>
+            </div>
+            <div class="card" onclick="openModal('huevo.jpg', 2,'appetizers')">
+                <img src="huevo.jpg" alt="Crispy egg yolk topped with Iberian ham">
+                <h3>Crispy egg yolk topped with Iberian ham</h3>
+            </div>
+            <div class="card" onclick="openModal('panipuri.jpg', 3, 'appetizers')">
+                <img src="panipuri.jpg" alt="Panipuri filled with creamy potato salad and salmon caviar">
+                <h3>
+                    Panipuri filled with creamy potato salad and salmon caviar
+                </h3>
+            </div>
+            <div class="card" onclick="openModal('tosta.jpg', 4,'appetizers')">
+                <img src="tosta.jpg" alt="Prawn and avocado toasts">
+                <h3>Prawn and avocado toasts</h3>
+            </div>
+            <div class="card" onclick="openModal('anguila.jpg', 5,'appetizers')">
+                <img src="anguila.jpg" alt="Baby eel and quail egg toasts">
+                <h3>Baby eel and quail egg toasts</h3>
+            </div>
+            <div class="card" onclick="openModal('tabla.jpg', 6,'appetizers')">
+                <img src="tabla.jpg" alt="Assorted cured meats and cheese board">
+                <h3>Assorted cured meats and cheese board</h3>
+            </div>
+            <div class="card" onclick="openModal('burrata.jpg', 7,'appetizers')">
+                <img src="burrata.jpg" alt="Cherry tomato and burrata skewers with pesto sauce">
+                <h3>Cherry tomato and burrata skewers with pesto sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('cabra.jpg', 8,'appetizers')">
+                <img src="cabra.jpg" alt="Mini goat cheese crostini with caramelized onion">
+                <h3>Mini goat cheese crostini with caramelized onion</h3>
+            </div>
+            <div class="card" onclick="openModal('rollitos.jpg', 9,'appetizers')">
+                <img src="rollitos.jpg" alt="Smoked salmon rolls with goat cheese">
+                <h3>Smoked salmon rolls with goat cheese</h3>
+            </div>
+            <div class="card" onclick="openModal('blinis.jpg', 10,'appetizers')">
+                <img src="blinis.jpg" alt="Mini blinis with smoked salmon">
+                <h3>Mini blinis with smoked salmon</h3>
+            </div>
+            <div class="card" onclick="openModal('tablaquesos.jpg', 11,'appetizers')">
+                <img src="tablaquesos.jpg" alt="Cheese board">
+                <h3>Cheese board</h3>
+            </div>
+            <div class="card" onclick="openModal('panpreñado.jpg', 12,'appetizers')">
+                <img src="panpreñado.jpg" alt="Cheese bread">
+                <h3>Bread stuffed with assorted cheeses abd leek</h3>
+            </div>
+        </div>
+    </section>
+    <!-- STARTERS -->
+    <section id="starters">
+        <h2>STARTER</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('tartar.jpg', 0,'starters')">
+                <img src="tartar.jpg" alt="Tuna tartare with avocado">
+                <h3>Tuna tartare with avocado</h3>
+            </div>
+            <div class="card" onclick="openModal('calamar.jpg', 1,'starters')">
+                <img src="calamar.jpg" alt="Squid in black ink with rice">
+                <h3>Squid in black ink with rice</h3>
+            </div>
+            <div class="card" onclick="openModal('apio.jpg', 2,'starters')">
+                <img src="apio.jpg" alt="Celery and turnip cream soup with apple, ham and croutons">
+                <h3>
+                    Celery and turnip cream soup with apple, ham and
+                    croutons
+                </h3>
+            </div>
+            <div class="card" onclick="openModal('champi.jpg', 3,'starters')">
+                <img src="champi.jpg" alt="Cream of mushroom soup with truffle">
+                <h3>Cream of mushroom soup with truffle</h3>
+            </div>
+            <div class="card" onclick="openModal('calabaza.jpg', 4,'starters')">
+                <img src="calabaza.jpg" alt="Pumpkin cream soup with truffle ravioli and cottage cheese">
+                <h3>
+                    Pumpkin cream soup with truffle ravioli and cottage
+                    cheese
+                </h3>
+            </div>
+            <div class="card" onclick="openModal('secreto.jpg', 5,'starters')">
+                <img src="secreto.jpg" alt='Iberian pork "secreto" tataki'>
+                <h3>Iberian pork "secreto" tataki</h3>
+            </div>
+            <div class="card" onclick="openModal('salmorejo.jpg', 6,'starters')">
+                <img src="salmorejo.jpg" alt="Salmorejo (Cold tomato soup)">
+                <h3>Salmorejo (Cold tomato soup)</h3>
+            </div>
+            <div class="card" onclick="openModal('ajo.jpg', 7, 'starters')">
+                <img src="ajo.jpg" alt="Cream of garlic soup">
+                <h3>Cream of garlic soup</h3>
+            </div>
+            <div class="card" onclick="openModal('perdiz.jpg', 8,'starters')">
+                <img src="perdiz.jpg" alt="Partridge salad withpomegranate">
+                <h3>Partridge salad with pomegranate</h3>
+            </div>
+            <div class="card" onclick="openModal('volauvent.jpg', 9,'starters')">
+                <img src="volauvent.jpg" alt="Mushroom vol-au-vent with hamin Pedro Ximenez sauce">
+                <h3>Mushroom vol-au-vent with ham in Pedro Ximenez sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('gamba.png', 10,'starters')">
+                <img src="gamba.png" alt="Prawn tartare">
+                <h3>Prawn tartare</h3>
+            </div>
+            <div class="card" onclick="openModal('sopacebolla.JPG', 11,'starters')">
+                <img src="sopacebolla.JPG" alt="Onion Soup">
+                <h3>Onion soup</h3>
+            </div>
+        </div>
+    </section>
+    <!-- MAIN COURSE -->
+    <section id="main">
+        <h2>MAIN COURSE</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('magret.jpg', 0, 'main')">
+                <img src="magret.jpg" alt="Magret of duck with Oporto and shallot sauce">
+                <h3>Magret of duck with Oporto and shallot sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('solomillo.jpg', 1,'main')">
+                <img src="solomillo.jpg" alt="Sirloin steak in whisky sauce">
+                <h3>Sirloin steak in whisky sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('lomo.jpg', 2, 'main')">
+                <img src="lomo.jpg" alt="Iberian pork tenderloin with honeymustard glace">
+                <h3>Iberian pork tenderloin with honey-mustard glace</h3>
+            </div>
+            <div class="card" onclick="openModal('bacalao.jpg', 3, 'main')">
+                <img src="bacalao.jpg" alt="Oven-baked cod">
+                <h3>Oven-baked cod</h3>
+            </div>
+            <div class="card" onclick="openModal('wellington.jpg', 4,'main')">
+                <img src="wellington.jpg" alt="Classic beef Wellington">
+                <h3>Classic beef Wellington</h3>
+            </div>
+            <div class="card" onclick="openModal('carrilleras.jpg', 5,'main')">
+                <img src="carrilleras.jpg" alt="Slow-braised beef cheeks in dark chocolate sauce">
+                <h3>Slow-braised beef cheeks in dark chocolate sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('cordero.jpg', 6, 'main')">
+                <img src="cordero.jpg" alt="Lamb chops with demi-glace">
+                <h3>Lamb chops with demi-glace</h3>
+            </div>
+            <div class="card" onclick="openModal('canelon.jpg', 7, 'main')">
+                <img src="canelon.jpg" alt="Duck and foie gras cannelloni">
+                <h3>Duck and foie gras cannelloni</h3>
+            </div>
+            <div class="card" onclick="openModal('salmon.jpg', 8, 'main')">
+                <img src="salmon.jpg" alt="Grilled salmon with cherry tomatoes and green asparagus">
+                <h3>Grilled salmon with cherry tomatoes and green asparagus</h3>
+            </div>
+            <div class="card" onclick="openModal('strogonoff.JPG', 9, 'main')">
+                <img src="strogonoff.JPG" alt="strogonoff">
+                <h3>Strogonoff</h3>
+            </div>
+        </div>
+    </section>
+    <!-- DESSERT -->
+    <section id="dessert">
+        <h2>DESSERT</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('limon.jpg', 0,'dessert')">
+                <img src="limon.jpg" alt="Lemon meringue pie">
+                <h3>Lemon meringue pie</h3>
+            </div>
+            <div class="card" onclick="openModal('torrija.jpg', 1,'dessert')">
+                <img src="torrija.jpg" alt='Caramelized Spanish "Torrijas" with vanilla ice cream'>
+                <h3>Caramelized Spanish "Torrijas" with vanilla ice cream</h3>
+            </div>
+            <div class="card" onclick="openModal('arabia.jpg', 2,'dessert')">
+                <img src="arabia.jpg" alt="Arabian tart">
+                <h3>Arabian tart</h3>
+            </div>
+            <div class="card" onclick="openModal('pera.jpg', 3, 'dessert')">
+                <img src="pera.jpg" alt="Red wine poached pear with vanilla ice cream">
+                <h3>Red wine poached pear with vanilla ice cream</h3>
+            </div>
+            <div class="card" onclick="openModal('milhojas.jpg', 4,'dessert')">
+                <img src="milhojas.jpg" alt="Mille-feuille with pastry cream and mixed berries">
+                <h3>Mille-feuille with pastry cream and mixed berries</h3>
+            </div>
+            <div class="card" onclick="openModal('vina.jpg', 5, 'dessert')">
+                <img src="vina.jpg" alt='"La Viña-Style" cheesecake with raspberry jam'>
+                <h3>"La Viña-Style" cheesecake with raspberry jam</h3>
+            </div>
+            <div class="card" onclick="openModal('pavlova.jpg', 7,'dessert')">
+                <img src="pavlova.jpg" alt="Meringue pavlova with berries">
+                <h3>Meringue pavlova with berries</h3>
+            </div>
+            <div class="card" onclick="openModal('tartamanzana.JPG', 8,'dessert')">
+                <img src="tartamanzana.JPG" alt="Apple tart with vanilla ice cream">
+                <h3>Apple tart with vanilla ice cream</h3>
+            </div>
+        </div>
+    </section>
+    <!-- MODAL -->
+    <div class="modal" id="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content" id="modal-content">
+            <button class="modal-prev" onclick="changeModal(-1)">
+                <img src="flecha-izquierda.png" alt="Anterior">
+            </button>
+
+            <img id="modal-img" src="" alt="">
+            <h3 id="modal-title"></h3>
+
+            <!-- Aquí se mostrarán los iconos de alérgenos dinámicamente -->
+            <div id="modal-allergens"></div>
+
+            <button class="modal-next" onclick="changeModal(1)">
+                <img src="flecha-derecha.png" alt="Siguiente">
+            </button>
+        </div>
+    </div>
+
+
+
+    <section class="allergen-info">
+        <h2>Información sobre alérgenos</h2>
+        <div class="allergen-icons">
+            <img src="gluten.png" alt="gluten">
+            <img src="crustaceos.png" alt="crustaceos">
+            <img src="huevo.png" alt="huevo">
+            <img src="pescado.png" alt="pescado">
+            <img src="cacahuetes.png" alt="cacahuetes">
+            <img src="soja.png" alt="soja">
+            <img src="lacteos.png" alt="lacteos">
+            <img src="frutoscascara.png" alt="frutos de cascara">
+            <img src="apio.png" alt="apio">
+            <img src="mostaza.png" alt="mostaza">
+            <img src="sesamo.png" alt="sesamo">
+            <img src="moluscos.png" alt="moluscos">
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>Finca "Las Ahijaderas de Pedro Llen"</p>
+                <p>Las Veguillas, Salamanca</p>
+                <p>37454, España (Spain)</p>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-right">
+                <p>Tel. +34 923 38 00 01</p>
+                <p>Email: info@huntinspain.com</p>
+                <p><a href="https://huntinspain.com/es/" target="_blank">www.huntinspain.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const menuText = {
+    es: {
+        nav: ["ENTRANTES", "PRIMEROS", "PLATO PRINCIPAL", "POSTRE"],
+        sections: ["ENTRANTES", "PRIMEROS", "PLATO PRINCIPAL","POSTRE"],
+        appetizers: [
+            'Muslitos de codorniz al estilo Villaroy',
+            'Brochetas de langostino crujientes con arroz inflado verde',
+            'Yema de huevo crujiente con jamón ibérico',
+            'Panipuri relleno de ensaladilla de patata y caviar de salmón',
+            'Tostas de langostino y aguacate',
+            'Tostas de anguila y huevo de codorniz',
+            'Tabla de embutidos y quesos',
+            'Brochetas de tomate cherry y burrata con pesto',
+            'Mini crostini de queso de cabra con cebolla caramelizada',
+            'Rollitos de salmón ahumado con queso de cabra',
+            'Mini blinis con salmón ahumado',
+            'Tabla de quesos',
+            'Pan preñado - Pan relleno de quesos y apio'
+        ],
+        appetizersAllergens: [
+            ['gluten', 'huevo'],                     // Muslitos de codorniz al estilo Villaroy
+            ['crustaceos', 'gluten'],                // Brochetas de langostino crujientes con arroz inflado verde
+            ['huevo', 'lacteos'],                    // Yema de huevo crujiente con jamón ibérico
+            ['gluten', 'pescado', 'huevo'],          // Panipuri relleno de ensaladilla de patata y caviar de salmón
+            ['gluten', 'crustaceos', 'lacteos'],     // Tostas de langostino y aguacate
+            ['gluten', 'pescado', 'huevo'],          // Tostas de anguila y huevo de codorniz
+            ['gluten', 'lacteos'],                   // Tabla de embutidos y quesos
+            ['lacteos', 'frutoscascara'],            // Brochetas de tomate cherry y burrata con pesto
+            ['gluten', 'lacteos'],                   // Mini crostini de queso de cabra con cebolla caramelizada
+            ['gluten', 'pescado', 'lacteos'],        // Rollitos de salmón ahumado con queso de cabra
+            ['gluten', 'pescado', 'lacteos'],        // Mini blinis con salmón ahumado.
+            ['gluten','lacteos'],                    //Tabla de quesos
+            ['gluten','lacteos'],                    //Pan preñado
+        ],
+
+        starters: [
+            'Tartar de atún con aguacate',
+            'Calamares en su tinta con arroz',
+            'Crema de apio y nabo con manzana, jamón y picatostes',
+            'Crema de champiñón con trufa',
+            'Crema de calabaza con ravioli de trufa y queso cottage',
+            'Tataki de secreto ibérico',
+            'Salmorejo',
+            'Crema de ajo',
+            'Ensalada de perdiz con granada',
+            'Vol-au-vent de champiñón con jamón en salsa Pedro Ximénez',
+            'Tartar de gamba',
+            'Sopa de cebolla'
+        ],
+
+        startersAllergens: [
+            ['pescado'],                               // Tartar de atún con aguacate
+            ['gluten', 'pescado'],                     // Calamares en su tinta con arroz
+            ['apio', 'gluten', 'lacteos'],             // Crema de apio y nabo con manzana, jamón y picatostes
+            ['lacteos'],                               // Crema de champiñón con trufa
+            ['gluten', 'lacteos'],                     // Crema de calabaza con ravioli de trufa y queso cottage
+            [],                                        // Tataki de secreto ibérico (solo carne, sin alérgenos principales)
+            [],                                        // Salmorejo (tomate, aceite, pan opcional)
+            [],                                        // Crema de ajo (normalmente solo ajo, aceite y huevo opcional)
+            [],                                        // Ensalada de perdiz con granada (sin alérgenos comunes)
+            ['gluten', 'huevo', 'lacteos'],           // Vol-au-vent de champiñón con jamón en salsa Pedro Ximénez
+            ['crustaceos'],
+            []
+        ],
+        main: [
+            'Magret de pato con salsa de Oporto y chalotas',
+            'Solomillo en salsa de whisky',
+            'Lomo de cerdo ibérico con glaseado de miel y mostaza',
+            'Bacalao al horno',
+            'Wellington clásico de ternera',
+            'Carrilleras de ternera estofadas en salsa de chocolate',
+            'Chuletas de cordero con demi-glace',
+            'Canelones de pato y foie',
+            'Salmón a la plancha con cherry y espárragos trigueros',
+            'Strogonoff'
+        ],
+        mainAllergens: [
+            [],                                        // Magret de pato con salsa de Oporto y chalotas
+            [],                                        // Solomillo en salsa de whisky
+            ['mostaza'],                               // Lomo de cerdo ibérico con glaseado de miel y mostaza
+            ['pescado'],                               // Bacalao al horno
+            ['gluten'],                                // Wellington clásico de ternera (masa de hojaldre)
+            [],                                        // Carrilleras de ternera estofadas en salsa de chocolate
+            [],                                        // Chuletas de cordero con demi-glace
+            ['gluten', 'lacteos'],                     // Canelones de pato y foie (pasta y posible crema/lacteo)
+            ['pescado'],                               //Salmón a la parrilla con cherry y espárragos trigueros
+            []                                         //Strogonoff
+        ],
+        dessert: [
+            'Tarta de limón con merengue',
+            'Torrijas caramelizadas con helado de vainilla',
+            'Tarta árabe',
+            'Pera al vino tinto con helado de vainilla',
+            'Milhojas con crema pastelera y frutos rojos',
+            'Tarta estilo "La Viña" con mermelada de frambuesa',
+            'Pavlova de merengue con frutos rojos',
+            'Tarta de manzana con helado de vainilla'
+            
+        ],
+        dessertAllergens: [
+            ['huevo', 'lacteos', 'gluten'],               // Tarta de limón con merengue
+            ['gluten', 'huevo', 'lacteos'],               // Torrijas caramelizadas con helado de vainilla
+            ['gluten', 'frutoscascara', 'huevo', 'lacteos'], // Tarta árabe (frutos secos en la masa)
+            ['lacteos'],                                  // Pera al vino tinto con helado de vainilla
+            ['gluten', 'huevo', 'lacteos'],              // Milhojas con crema pastelera y frutos rojos
+            ['gluten', 'huevo', 'lacteos'],              // Tarta estilo "La Viña" con mermelada de frambuesa
+            ['huevo', 'lacteos'],                         // Pavlova de merengue con frutos rojos
+            ['huevo','lacteos']
+        ],
+    },
+    en: {
+        nav: ["APPETIZERS", "STARTER", "MAIN COURSE", "DESSERT"],
+        sections: ["APPETIZERS", "STARTER", "MAIN COURSE", "DESSERT"],
+        appetizers: [
+            'Quail drumsticks in "Villaroy Style"',
+            'Green puffed rice-crusted prawn skewers',
+            'Crispy egg yolk topped with Iberian ham',
+            'Panipuri filled with creamy potato salad and salmon caviar',
+            'Prawn and avocado toasts',
+            'Baby eel and quail egg toasts',
+            'Assorted cured meats and cheese board',
+            'Cherry tomato and burrata skewers with pesto sauce',
+            'Mini goat cheese crostini with caramelized onion',
+            'Smoked salmon rolls with goat cheese',
+            'Mini blinis with smoked salmon',
+            'Cheese board',
+            'Bread stuffed with assorted cheeses and leek',
+        ],
+        appetizersAllergens: [
+            ['gluten', 'egg'],
+            ['crustaceans', 'gluten'],
+            ['egg', 'dairy'],
+            ['gluten', 'fish', 'egg'],
+            ['gluten', 'crustaceans', 'dairy'],
+            ['gluten', 'fish', 'egg'],
+            ['gluten', 'dairy'],
+            ['dairy', 'tree-nuts'],
+            ['gluten', 'dairy'],
+            ['gluten', 'fish', 'dairy'],
+            ['gluten', 'fish', 'dairy'],
+            ['gluten','dairy'],
+            ['gluten','dairy'],
+        ],
+        starters: [
+            'Tuna tartare with avocado',
+            'Squid in black ink with rice',
+            'Celery and turnip cream soup with apple, ham and croutons',
+            'Cream of mushroom soup with truffle',
+            'Pumpkin cream soup with truffle ravioli and cottage cheese',
+            'Iberian pork "secreto" tataki',
+            'Salmorejo (Cold tomato soup)',
+            'Cream of garlic soup',
+            'Partridge salad with pomegranate',
+            'Mushroom vol-au-vent with ham in Pedro Ximenez sauce',
+            'Prawn tartare',
+            'Onion soup'
+        ],
+         startersAllergens: [
+            ['fish'],
+            ['gluten', 'fish'],
+            ['celery', 'gluten', 'dairy'],
+            ['dairy'],
+            ['gluten', 'dairy'],
+            [],
+            [],
+            [],
+            [],
+            ['gluten', 'egg', 'dairy'],
+            ['crustaceans'],
+            [],
+        ],
+        main: [
+            'Magret of duck with Oporto and shallot sauce',
+            'Sirloin steak in whisky sauce',
+            'Iberian pork tenderloin with honey-mustard glace',
+            'Oven-baked cod',
+            'Classic beef Wellington',
+            'Slow-braised beef cheeks in dark chocolate sauce',
+            'Lamb chops with demi-glace',
+            'Duck and foie gras cannelloni',
+            'Grilled salmon with cherry tomatoes and green asparagus',
+            'Strogonoff'
+        ],
+        mainAllergens: [
+            [],
+            [],
+            ['mustard'],
+            ['fish'],
+            ['gluten'],
+            [],
+            [],
+            ['gluten', 'dairy'],
+            ['fish'],
+            []
+        ],
+
+        dessert: [
+            'Lemon meringue pie',
+            'Caramelized Spanish "Torrijas" with vanilla ice cream',
+            'Arabian tart',
+            'Red wine poached pear with vanilla ice cream',
+            'Mille-feuille with pastry cream and mixed berries',
+            '"La Viña-Style" cheesecake with raspberry jam',
+            'Meringue pavlova with berries',
+            'Apple tart with vanilla ice cream'
+        ],
+        dessertAllergens: [
+            ['egg', 'dairy', 'gluten'],
+            ['gluten', 'egg', 'dairy'],
+            ['gluten', 'tree-nuts', 'egg', 'dairy'],
+            ['dairy'],
+            ['gluten', 'egg', 'dairy'],
+            ['gluten', 'egg', 'dairy'],
+            ['gluten', 'dairy', 'egg'],
+            ['egg', 'dairy'],
+            ['egg','dairy']
+        ],
+    }
+};
+
+   const allergenIcons = {
+        gluten: "gluten.png",
+        huevo: "huevo.png",
+        lacteos: "lacteos.png",
+        crustaceos: "crustaceos.png",
+        pescado: "pescado.png",
+        frutoscascara: "frutoscascara.png",
+        apio: "apio.png",
+        mostaza: "mostaza.png",
+        sesamo: "sesamo.png",
+        soja: "soja.png",
+        moluscos: "moluscos.png"
+    };
+
+    const allergenNames = {
+    es: {
+        gluten: "Gluten",
+        huevo: "Huevo",
+        lacteos: "Lácteos",
+        crustaceos: "Crustáceos",
+        pescado: "Pescado",
+        frutoscascara: "Frutos de cáscara",
+        apio: "Apio",
+        mostaza: "Mostaza",
+        sesamo: "Sésamo",
+        soja: "Soja",
+        moluscos: "Moluscos"
+    },
+    en: {
+        gluten: "Gluten",
+        huevo: "Egg",
+        lacteos: "Dairy",
+        crustaceos: "Crustaceans",
+        pescado: "Fish",
+        frutoscascara: "Tree nuts",
+        apio: "Celery",
+        mostaza: "Mustard",
+        sesamo: "Sesame",
+        soja: "Soy",
+        moluscos: "Mollusks"
+    }
+    };
+
+    const menuAllergens = {
+        appetizers: menuText.es.appetizersAllergens,
+        starters: menuText.es.startersAllergens,
+        main: menuText.es.mainAllergens,
+        dessert: menuText.es.dessertAllergens
+    };
+
+
+
+    let currentLang = 'en';
+    let currentSection = '';
+    let currentIndex = 0;
+
+
+
+    function displayAllergensOnCards() {
+        const sections = ['appetizers', 'starters', 'main', 'dessert'];
+
+        sections.forEach(sectionId => {
+            const cards = document.querySelectorAll(`#${sectionId} .card`);
+            cards.forEach((card, i) => {
+                const allergens = menuAllergens[sectionId][i];
+                let container = card.querySelector('.allergens');
+
+                // Crear contenedor si no existe
+                if(!container) {
+                    container = document.createElement('div');
+                    container.classList.add('allergens');
+                    card.appendChild(container);
+                }
+
+                // Limpiar iconos anteriores
+                container.innerHTML = '';
+
+                allergens.forEach(allergen => {
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('allergen-item');
+
+                    const img = document.createElement('img');
+                    img.src = allergenIcons[allergen];
+                    img.alt = allergen;
+                    img.classList.add('allergen-icon');
+
+                    const label = document.createElement('span');
+                    label.classList.add('allergen-text');
+                    label.textContent = allergenNames[currentLang][allergen];
+
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(label);
+                    container.appendChild(wrapper);
+                });
+
+
+            });
+        });
+    }
+
+    function displayAllergensInModal(section, index) {
+        const modalAllergens = document.getElementById('modal-allergens');
+        const allergens = menuAllergens[section][index];
+
+        // Limpiar iconos anteriores
+        modalAllergens.innerHTML = '';
+
+        allergens.forEach(allergen => {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('allergen-item');
+
+            const img = document.createElement('img');
+            img.src = allergenIcons[allergen];
+            img.alt = allergen;
+            img.classList.add('allergen-icon');
+
+            const label = document.createElement('span');
+            label.classList.add('allergen-text');
+            label.textContent = allergenNames[currentLang][allergen];
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(label);
+            modalAllergens.appendChild(wrapper);
+        });
+
+    }
+
+
+
+
+    function openModal(src, index, section) {
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+
+        currentSection = section;
+        currentIndex = index;
+
+        modal.style.display = 'flex';
+        modalImg.src = src;
+        modalTitle.innerText = menuText[currentLang][section][index];// Español por ahora
+
+        displayAllergensInModal(section, index); // <<--- mostrar iconos en modal
+
+        // Animación
+        modalContent.style.transform = 'scale(0.8)';
+        modalContent.style.opacity = '0';
+        setTimeout(() => {
+            modalContent.style.transform = 'scale(1)';
+            modalContent.style.opacity = '1';
+        }, 10);
+    }
+
+
+    function changeModal(direction) {
+        const sectionItems = menuText[currentLang][currentSection];
+        currentIndex += direction;
+
+        if (currentIndex < 0) currentIndex = sectionItems.length - 1;
+        if (currentIndex >= sectionItems.length) currentIndex = 0;
+
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const card = document.querySelectorAll(`#${currentSection} .card`)[currentIndex];
+        const src = card.querySelector('img').src;
+
+        modalImg.src = src;
+        modalTitle.innerText = sectionItems[currentIndex];
+
+        displayAllergensInModal(currentSection, currentIndex); // <<--- actualizar alérgenos
+    }
+
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+
+        modalContent.style.transform = 'scale(0.8)';
+        modalContent.style.opacity = '0';
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300); // Coincide con la transición
+    }
+
+    window.onclick = function(event) {
+        if (event.target === document.getElementById('modal')) {
+            closeModal();
+        }
+    };
+
+    function setLanguage(lang) {
+        currentLang = lang;
+
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach((link, i) => {
+            link.textContent = menuText[lang].nav[i];
+        });
+
+        const sectionIds = ['appetizers', 'starters', 'main', 'dessert'];
+        sectionIds.forEach((id, idx) => {
+            document.querySelector(`#${id} h2`).textContent = menuText[lang].sections[idx];
+        });
+
+        sectionIds.forEach(sectionId => {
+            const cards = document.querySelectorAll(`#${sectionId} .card h3`);
+            cards.forEach((card, i) => {
+                card.textContent = menuText[lang][sectionId][i];
+            });
+        });
+
+        displayAllergensOnCards();
+
+            // 🔹 Si el modal está abierto, actualizar título + alérgenos visibles
+        const modal = document.getElementById("modal");
+        if (modal.style.display === "flex") {
+            document.getElementById("modal-title").innerText = menuText[lang][currentSection][currentIndex];
+            displayAllergensInModal(currentSection, currentIndex);
+        }   
+
+    }
+
+    window.onload = function() {
+        setLanguage('en'); 
+        
+
+        if (document.getElementById('modal').style.display === "flex") {
+            displayAllergensInModal(currentSection, currentIndex);
+        }
+
+    };
+
+    </script>
+
+</body>
+</html>
