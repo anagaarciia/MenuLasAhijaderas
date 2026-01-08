@@ -206,9 +206,11 @@
             }
     
             .allergen-icons img {
-                width: 80px;
-                height: 80px;
+                width: 60px;
+                height: 60px;
                 object-fit: contain;
+                display: block;       /* asegura que se comporte igual todos */
+                margin: 0 auto;
                 opacity: 0.9;
                 transition: transform 0.2s ease, opacity 0.2s ease;
             }
@@ -486,6 +488,26 @@
                 <img src="panpreñado.jpg" alt="Cheese bread">
                 <h3>Bread stuffed with assorted cheeses abd leek</h3>
             </div>
+            <div class="card" onclick="openModal('palitoszanahoria.jpg', 13,'appetizers')">
+                <img src="palitoszanahoria.jpg" alt="Carrot sticks">
+                <h3>Fresh carrot and red&green bell pepper crudités served with dipping sauce</h3>
+            </div>
+            <div class="card" onclick="openModal('pollorebozado.jpg', 14,'appetizers')">
+                <img src="pollorebozado.jpg" alt="Crispy chicken">
+                <h3>Crispy chicken skewers served with guacamole</h3>
+            </div>
+            <div class="card" onclick="openModal('minihamburguesas.jpg', 15,'appetizers')">
+                <img src="minihamburguesas.jpg" alt="Mini burgers">
+                <h3>Mini beef burgers with cheese</h3>
+            </div>
+            <div class="card" onclick="openModal('tacos.jpg', 16,'appetizers')">
+                <img src="tacos.jpg" alt="tacos">
+                <h3>Pork tacos</h3>
+            </div>
+            <div class="card" onclick="openModal('fajitasjpg', 17,'appetizers')">
+                <img src="fajitas.jpg" alt="fajitas">
+                <h3>Chicken fajitas</h3>
+            </div>
         </div>
     </section>
     <!-- STARTERS -->
@@ -546,6 +568,18 @@
                 <img src="sopacebolla.JPG" alt="Onion Soup">
                 <h3>Onion soup</h3>
             </div>
+            <div class="card" onclick="openModal('lombarda.jpg', 12,'starters')">
+                <img src="lombarda.jpg" alt="Red cabbage">
+                <h3>Red cabbage cream soup</h3>
+            </div>
+            <div class="card" onclick="openModal('ensaladamelon.jpg', 13,'starters')">
+                <img src="ensaladamelon.jpg" alt="Melon salad">
+                <h3>Melon salad with Iberian ham</h3>
+            </div>
+            <div class="card" onclick="openModal('tartarsalmonpg', 14,'starters')">
+                <img src="tartarsalmon.jpg" alt="Salmon tartare with pancakes">
+                <h3>Salmon tartare with pancakes</h3>
+            </div>
         </div>
     </section>
     <!-- MAIN COURSE -->
@@ -592,6 +626,18 @@
                 <img src="strogonoff.JPG" alt="strogonoff">
                 <h3>Strogonoff</h3>
             </div>
+            <div class="card" onclick="openModal('costillasmiel.jpg', 10, 'main')">
+                <img src="costillasmiel.jpg" alt="ribs">
+                <h3>Honey-glazed ribs</h3>
+            </div>
+            <div class="card" onclick="openModal('perdicesoloroso.jpg', 11, 'main')">
+                <img src="perdicesoloroso.jpg" alt="Partridge">
+                <h3>Oloroso-braised partridge</h3>
+            </div>
+            <div class="card" onclick="openModal('ragu.jpg', 12, 'main')">
+                <img src="ragu.jpg" alt="ragu">
+                <h3>Beef ragù with potatoes</h3>
+            </div>
         </div>
     </section>
     <!-- DESSERT -->
@@ -630,6 +676,10 @@
                 <img src="tartamanzana.JPG" alt="Apple tart with vanilla ice cream">
                 <h3>Apple tart with vanilla ice cream</h3>
             </div>
+            <div class="card" onclick="openModal('banoffe.jpg', 9,'dessert')">
+                <img src="banoffe.jpg" alt="Banoffee">
+                <h3>Banoffee</h3>
+            </div>
         </div>
     </section>
     <!-- MODAL -->
@@ -653,24 +703,27 @@
     </div>
 
 
-
     <section class="allergen-info">
-        <h2>Información sobre alérgenos</h2>
+        <h2 id="allergen-title">Allergen Information</h2>
+    
         <div class="allergen-icons">
-            <img src="gluten.png" alt="gluten">
-            <img src="crustaceos.png" alt="crustaceos">
-            <img src="huevo.png" alt="huevo">
-            <img src="pescado.png" alt="pescado">
-            <img src="cacahuetes.png" alt="cacahuetes">
-            <img src="soja.png" alt="soja">
-            <img src="lacteos.png" alt="lacteos">
-            <img src="frutoscascara.png" alt="frutos de cascara">
-            <img src="apio.png" alt="apio">
-            <img src="mostaza.png" alt="mostaza">
-            <img src="sesamo.png" alt="sesamo">
-            <img src="moluscos.png" alt="moluscos">
+            <div class="allergen-item"><img src="gluten.png"><span class="allergen-text">Gluten</span></div>
+            <div class="allergen-item"><img src="crustaceos.png"><span class="allergen-text">Crustaceans</span></div>
+            <div class="allergen-item"><img src="huevo.png"><span class="allergen-text">Egg</span></div>
+            <div class="allergen-item"><img src="pescado.png"><span class="allergen-text">Fish</span></div>
+            <div class="allergen-item"><img src="cacahuetes.png"><span class="allergen-text">Peanuts</span></div>
+            <div class="allergen-item"><img src="soja.png"><span class="allergen-text">Soy</span></div>
+            <div class="allergen-item"><img src="lacteos.png"><span class="allergen-text">Dairy</span></div>
+            <div class="allergen-item"><img src="frutoscascara.png"><span class="allergen-text">Tree nuts</span></div>
+            <div class="allergen-item"><img src="apio.png"><span class="allergen-text">Celery</span></div>
+            <div class="allergen-item"><img src="mostaza.png"><span class="allergen-text">Mustard</span></div>
+            <div class="allergen-item"><img src="sesamo.png"><span class="allergen-text">Sesame</span></div>
+            <div class="allergen-item"><img src="moluscos.png"><span class="allergen-text">Mollusks</span></div>
         </div>
     </section>
+    
+    
+    
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -707,22 +760,32 @@
             'Rollitos de salmón ahumado con queso de cabra',
             'Mini blinis con salmón ahumado',
             'Tabla de quesos',
-            'Pan preñado - Pan relleno de quesos y apio'
+            'Pan preñado - Pan relleno de quesos y apio',
+            'Palitos de zanahoria, pimiento verde y rojo servidos con salsa',
+            'Pollo rebozado con guacamole',
+            'Mini hamburguesas de ternera con queso',
+            'Tacos de cerdo',
+            'Fajitas de pollo',
         ],
         appetizersAllergens: [
-            ['gluten', 'huevo'],                     // Muslitos de codorniz al estilo Villaroy
-            ['crustaceos', 'gluten'],                // Brochetas de langostino crujientes con arroz inflado verde
-            ['huevo', 'lacteos'],                    // Yema de huevo crujiente con jamón ibérico
+            ['gluten', 'huevo','lacteos'],           // Muslitos de codorniz al estilo Villaroy
+            ['gluten','crustaceos','huevo' ],        // Brochetas de langostino crujientes con arroz inflado verde
+            ['huevo'],                               // Yema de huevo crujiente con jamón ibérico
             ['gluten', 'pescado', 'huevo'],          // Panipuri relleno de ensaladilla de patata y caviar de salmón
-            ['gluten', 'crustaceos', 'lacteos'],     // Tostas de langostino y aguacate
+            ['gluten', 'crustaceos'],                // Tostas de langostino y aguacate
             ['gluten', 'pescado', 'huevo'],          // Tostas de anguila y huevo de codorniz
             ['gluten', 'lacteos'],                   // Tabla de embutidos y quesos
             ['lacteos', 'frutoscascara'],            // Brochetas de tomate cherry y burrata con pesto
             ['gluten', 'lacteos'],                   // Mini crostini de queso de cabra con cebolla caramelizada
-            ['gluten', 'pescado', 'lacteos'],        // Rollitos de salmón ahumado con queso de cabra
+            ['pescado', 'lacteos'],                  // Rollitos de salmón ahumado con queso de cabra
             ['gluten', 'pescado', 'lacteos'],        // Mini blinis con salmón ahumado.
             ['gluten','lacteos'],                    //Tabla de quesos
             ['gluten','lacteos'],                    //Pan preñado
+            [],                                      //Palitos de zanahoria y pimiento
+            ['gluten','lacteos','huevo'],            //Palitos de pollo rebozado
+            ['gluten','lacteos'],                    //Mini hamburguesas de ternera con queso
+            ['gluten'],                              //Tacos de cerdo
+            ['gluten'],                              //Fajitas de pollo
         ],
 
         starters: [
@@ -737,22 +800,28 @@
             'Ensalada de perdiz con granada',
             'Vol-au-vent de champiñón con jamón en salsa Pedro Ximénez',
             'Tartar de gamba',
-            'Sopa de cebolla'
+            'Sopa de cebolla',
+            'Crema de lombarda',
+            'Ensalada de melón y jamón',
+            'Tartar de salmón con pancakes'
         ],
 
         startersAllergens: [
             ['pescado'],                               // Tartar de atún con aguacate
-            ['gluten', 'pescado'],                     // Calamares en su tinta con arroz
-            ['apio', 'gluten', 'lacteos'],             // Crema de apio y nabo con manzana, jamón y picatostes
+            ['pescado'],                               // Calamares en su tinta con arroz
+            ['apio', 'gluten'],                        // Crema de apio y nabo con manzana, jamón y picatostes
             ['lacteos'],                               // Crema de champiñón con trufa
             ['gluten', 'lacteos'],                     // Crema de calabaza con ravioli de trufa y queso cottage
             [],                                        // Tataki de secreto ibérico (solo carne, sin alérgenos principales)
-            [],                                        // Salmorejo (tomate, aceite, pan opcional)
+            ['huevo'],                                 // Salmorejo (tomate, aceite, pan opcional)
             [],                                        // Crema de ajo (normalmente solo ajo, aceite y huevo opcional)
             [],                                        // Ensalada de perdiz con granada (sin alérgenos comunes)
-            ['gluten', 'huevo', 'lacteos'],           // Vol-au-vent de champiñón con jamón en salsa Pedro Ximénez
-            ['crustaceos'],
-            []
+            ['gluten', 'huevo', 'lacteos'],            // Vol-au-vent de champiñón con jamón en salsa Pedro Ximénez
+            ['crustaceos'],                            //Tartar de gamba
+            ['lacteos'],                               //Sopa de cebolla
+            [],                                        //Crema de lombarda
+            [],                                        //Ensalada de melón y jamón
+            ['pescado'],                               //Tartar de salmón
         ],
         main: [
             'Magret de pato con salsa de Oporto y chalotas',
@@ -764,7 +833,10 @@
             'Chuletas de cordero con demi-glace',
             'Canelones de pato y foie',
             'Salmón a la plancha con cherry y espárragos trigueros',
-            'Strogonoff'
+            'Strogonoff',
+            'Costillas a la miel',
+            'Perdices al oloroso',
+            'Ragù con patatas'
         ],
         mainAllergens: [
             [],                                        // Magret de pato con salsa de Oporto y chalotas
@@ -776,7 +848,11 @@
             [],                                        // Chuletas de cordero con demi-glace
             ['gluten', 'lacteos'],                     // Canelones de pato y foie (pasta y posible crema/lacteo)
             ['pescado'],                               //Salmón a la parrilla con cherry y espárragos trigueros
-            []                                         //Strogonoff
+            [],                                        //Strogonoff
+            [],                                        //Costillas a la miel 
+            [],                                        //Perdices al oloroso
+            [],                                        //Ragú con patatas 
+
         ],
         dessert: [
             'Tarta de limón con merengue',
@@ -786,18 +862,20 @@
             'Milhojas con crema pastelera y frutos rojos',
             'Tarta estilo "La Viña" con mermelada de frambuesa',
             'Pavlova de merengue con frutos rojos',
-            'Tarta de manzana con helado de vainilla'
+            'Tarta de manzana con helado de vainilla',
+            'Banoffee - Tarta de plátano'
             
         ],
         dessertAllergens: [
-            ['huevo', 'lacteos', 'gluten'],               // Tarta de limón con merengue
-            ['gluten', 'huevo', 'lacteos'],               // Torrijas caramelizadas con helado de vainilla
-            ['gluten', 'frutoscascara', 'huevo', 'lacteos'], // Tarta árabe (frutos secos en la masa)
-            ['lacteos'],                                  // Pera al vino tinto con helado de vainilla
-            ['gluten', 'huevo', 'lacteos'],              // Milhojas con crema pastelera y frutos rojos
-            ['gluten', 'huevo', 'lacteos'],              // Tarta estilo "La Viña" con mermelada de frambuesa
-            ['huevo', 'lacteos'],                         // Pavlova de merengue con frutos rojos
-            ['huevo','lacteos']
+            ['huevo', 'lacteos', 'gluten'],                     // Tarta de limón con merengue
+            ['gluten', 'huevo', 'lacteos'],                     // Torrijas caramelizadas con helado de vainilla
+            ['gluten', 'frutoscascara', 'huevo', 'lacteos'],    // Tarta árabe (frutos secos en la masa)
+            ['lacteos'],                                        // Pera al vino tinto con helado de vainilla
+            ['gluten', 'huevo', 'lacteos'],                     // Milhojas con crema pastelera y frutos rojos
+            ['gluten', 'huevo', 'lacteos'],                     // Tarta estilo "La Viña" con mermelada de frambuesa
+            ['huevo', 'lacteos'],                               // Pavlova de merengue con frutos rojos
+            ['huevo','lacteos'],                                //Tarta de manzana con helado de vainilla
+            ['huevo', 'lacteos'],                               //Banoffee
         ],
     },
     en: {
@@ -817,21 +895,31 @@
             'Mini blinis with smoked salmon',
             'Cheese board',
             'Bread stuffed with assorted cheeses and leek',
+            'Fresh carrot and red&green bell pepper crudités served with dipping sauce',
+            'Crispy chicken skewers served with guacamole',
+            'Mini beef burgers with cheese',
+            'Pork tacos',
+            'Chicken fajitas'
         ],
         appetizersAllergens: [
-            ['gluten', 'egg'],
-            ['crustaceans', 'gluten'],
-            ['egg', 'dairy'],
-            ['gluten', 'fish', 'egg'],
-            ['gluten', 'crustaceans', 'dairy'],
-            ['gluten', 'fish', 'egg'],
-            ['gluten', 'dairy'],
-            ['dairy', 'tree-nuts'],
-            ['gluten', 'dairy'],
-            ['gluten', 'fish', 'dairy'],
-            ['gluten', 'fish', 'dairy'],
-            ['gluten','dairy'],
-            ['gluten','dairy'],
+            ['gluten', 'egg'],                      //Quail drumsticks in "Villaroy Style"
+            ['crustaceans', 'gluten'],              //Green puffed rice-crusted prawn skewers
+            ['egg', 'dairy'],                       //Crispy egg yolk topped with Iberian ham
+            ['gluten', 'fish', 'egg'],              //Panipuri filled with creamy potato salad and salmon caviar
+            ['gluten', 'crustaceans', 'dairy'],     //Prawn and avocado toasts 
+            ['gluten', 'fish', 'egg'],              //Baby eel and quail egg toasts
+            ['gluten', 'dairy'],                    //Assorted cured meats and cheese board
+            ['dairy', 'tree-nuts'],                 //Cherry tomato and burrata skewers with pesto sauce
+            ['gluten', 'dairy'],                    //Mini goat cheese crostini with caramelized onion
+            ['gluten', 'fish', 'dairy'],            //Smoked salmon rolls with goat cheese
+            ['gluten', 'fish', 'dairy'],            //Mini blinis with smoked salmon
+            ['gluten','dairy'],                     //Cheese board
+            ['gluten','dairy'],                     //Bread stuffed with assorted cheeses and leek
+            [],                                     //Fresh carrot and red&green bell pepper crudités served with dipping sauce
+            ['dairy'],                              //Crispy chicken skewers served with guacamole
+            [],                                     //Mini beef burgers with cheese
+            [],                                     //Pork tacos
+            [],                                     //Chicken fajitas
         ],
         starters: [
             'Tuna tartare with avocado',
@@ -845,21 +933,27 @@
             'Partridge salad with pomegranate',
             'Mushroom vol-au-vent with ham in Pedro Ximenez sauce',
             'Prawn tartare',
-            'Onion soup'
+            'Onion soup',
+            'Red cabbage cream soup',
+            'Melon salad with Iberian ham',
+            'Salmon tartare with pancakes'
         ],
          startersAllergens: [
-            ['fish'],
-            ['gluten', 'fish'],
-            ['celery', 'gluten', 'dairy'],
-            ['dairy'],
-            ['gluten', 'dairy'],
-            [],
-            [],
-            [],
-            [],
-            ['gluten', 'egg', 'dairy'],
-            ['crustaceans'],
-            [],
+            ['fish'],                                   //Tuna tartare with avocado                               
+            ['gluten', 'fish'],                         //Squid in black ink with rice
+            ['celery', 'gluten', 'dairy'],              //Celery and turnip cream soup with apple, ham and croutons
+            ['dairy'],                                  //Cream of mushroom soup with truffle
+            ['gluten', 'dairy'],                        //Pumpkin cream soup with truffle ravioli and cottage cheese
+            [],                                         //Iberian pork "secreto" tataki
+            [],                                         //Salmorejo (Cold tomato soup)
+            [],                                         //Cream of garlic soup
+            [],                                         //Partridge salad with pomegranate
+            ['gluten', 'egg', 'dairy'],                 //Mushroom vol-au-vent with ham in Pedro Ximenez sauce
+            ['crustaceans'],                            //Prawn tartare
+            [],                                         //Onion soup
+            [],                                         //Red cabbage cream soup
+            [],                                         //Melon salad with Iberian ham
+            [],                                         //Salmon tartare with pancakes
         ],
         main: [
             'Magret of duck with Oporto and shallot sauce',
@@ -871,19 +965,25 @@
             'Lamb chops with demi-glace',
             'Duck and foie gras cannelloni',
             'Grilled salmon with cherry tomatoes and green asparagus',
-            'Strogonoff'
+            'Strogonoff',
+            'Honey-glazed ribs',
+            'Oloroso-braised Partridge',
+            'Beef ragù with potatoes',
         ],
         mainAllergens: [
-            [],
-            [],
-            ['mustard'],
-            ['fish'],
-            ['gluten'],
-            [],
-            [],
-            ['gluten', 'dairy'],
-            ['fish'],
-            []
+            [],                     //Magret of duck with Oporto and shallot sauce
+            [],                     //Sirloin steak in whisky sauce
+            ['mustard'],            //Iberian pork tenderloin with honey-mustard glace
+            ['fish'],               //Oven-baked cod
+            ['gluten'],             //Classic beef Wellington
+            [],                     //Slow-braised beef cheeks in dark chocolate sauce
+            [],                     //Lamb chops with demi-glace
+            ['gluten', 'dairy'],    //Duck and foie gras cannelloni
+            ['fish'],               //Grilled salmon with cherry tomatoes and green asparagus
+            [],                     //Strogonoff
+            [],                     //Honey-glazed ribs
+            [],                     //Oloroso-braised Partridge
+            [],                     //Beef ragù with potatoes
         ],
 
         dessert: [
@@ -894,18 +994,19 @@
             'Mille-feuille with pastry cream and mixed berries',
             '"La Viña-Style" cheesecake with raspberry jam',
             'Meringue pavlova with berries',
-            'Apple tart with vanilla ice cream'
+            'Apple tart with vanilla ice cream',
+            'Banoffee - Banana tart'
         ],
         dessertAllergens: [
-            ['egg', 'dairy', 'gluten'],
-            ['gluten', 'egg', 'dairy'],
-            ['gluten', 'tree-nuts', 'egg', 'dairy'],
-            ['dairy'],
-            ['gluten', 'egg', 'dairy'],
-            ['gluten', 'egg', 'dairy'],
-            ['gluten', 'dairy', 'egg'],
-            ['egg', 'dairy'],
-            ['egg','dairy']
+            ['egg', 'dairy', 'gluten'],                     //Lemon meringue pie
+            ['gluten', 'egg', 'dairy'],                     //Caramelized Spanish "Torrijas" with vanilla ice cream
+            ['gluten', 'tree-nuts', 'egg', 'dairy'],        //Arabian tart      
+            ['dairy'],                                      //Red wine poached pear with vanilla ice cream                          
+            ['gluten', 'egg', 'dairy'],                     //"La Viña-Style" cheesecake with raspberry jam             
+            ['gluten', 'egg', 'dairy'],                     //Mille-feuille with pastry cream and mixed berries                    //La Viña-Style" cheesecake with raspberry jam
+            ['egg', 'dairy'],                               //Meringue pavlova with berries
+            ['egg','dairy'],                                //Apple tart with vanilla ice cream
+            ['egg','dairy'],                                //Banoffee
         ],
     }
 };
@@ -953,6 +1054,17 @@
     }
     };
 
+    const footerAllergensText = {
+    en: [
+        "Gluten", "Crustaceans", "Egg", "Fish", "Peanuts", "Soy",
+        "Dairy", "Tree nuts", "Celery", "Mustard", "Sesame", "Mollusks"
+    ],
+    es: [
+        "Gluten", "Crustáceos", "Huevo", "Pescado", "Cacahuetes", "Soja",
+        "Lácteos", "Frutos de cáscara", "Apio", "Mostaza", "Sésamo", "Moluscos"
+    ]
+    };
+
     const menuAllergens = {
         appetizers: menuText.es.appetizersAllergens,
         starters: menuText.es.startersAllergens,
@@ -960,7 +1072,7 @@
         dessert: menuText.es.dessertAllergens
     };
 
-
+    
 
     let currentLang = 'en';
     let currentSection = '';
@@ -1120,6 +1232,17 @@
             cards.forEach((card, i) => {
                 card.textContent = menuText[lang][sectionId][i];
             });
+        // 🔹 TÍTULO DE ALÉRGENOS
+        document.getElementById("allergen-title").textContent =
+            lang === "es" ? "Información sobre alérgenos" : "Allergen Information";
+
+        // 🔹 TEXTO DE CADA ALÉRGENO
+        const allergenTexts = document.querySelectorAll(".allergen-info .allergen-text");
+
+        allergenTexts.forEach((span, i) => {
+            span.textContent = footerAllergensText[lang][i];
+        });
+
         });
 
         displayAllergensOnCards();
